@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>BrickUI 砖块UI 模块化用户界面</title>
+    <link href="/static/normalize.css" rel="stylesheet">
+    <link href="/static/restyle.css" rel="stylesheet">
+    <link href="/static/top.css" rel="stylesheet">
+    <link href="/static/button.css" rel="stylesheet">
+    <link href="/static/index/style.css" rel="stylesheet">
+    <link href="/static/codemirror/codemirror.css" rel="stylesheet">
+    <link href="/static/codemirror/panda-syntax.css" rel="stylesheet">
+    <script src="/static/codemirror/codemirror.js"></script>
+    <script src="/static/codemirror/mode/javascript/javascript.js"></script>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/index/js.js"></script>
+</head>
+<body>
+{include file="public/top" /}
+<div class="wrap clearfix">
+    <div class="code">
+            <textarea id="code" name="code">
+// 输入一个JSON
+{
+  ui: 'normal-layout',
+  brick: {
+  }
+}
+</textarea>
+    </div>
+    <div class="explain tab">
+        <div class="head">
+            <a data-tab="demo" class="active">DEMO</a>
+            <a data-tab="explain">说明</a>
+        </div>
+        <div class="body">
+            <div data-tab="demo" class="active">
+                                <textarea id="demo" name="demo">
+{
+  ui: 'normal-layout', // 主模块布局名称
+  brick: {// 主模块包含的子模块
+    top: 'top-qq', // 子模块（布局的头部填充块）
+    left: 'left-163', // 子模块（布局的左侧填充块）
+    main: {// 子模块 (引用另一个主模块)
+      ui: 'main-sina', // 布局主体采用的UI
+      brick: {
+        list: 'list-baidu', // 主体列表块
+        page: 'page-google' // 主体列表分页块
+      }
+    },
+    footer: [
+      {
+        ui: 'a1-b1',
+        brick: {
+          head: 'a11-b11'
+        }
+      },
+      {
+        ui: 'a2-b2'
+      }
+    ]
+  }
+}
+</textarea>
+            </div>
+            <div class="explain-info" data-tab="explain">
+                <p>BrickUI只有两种模块1.布局模块2.子模块</p>
+                <p>布局模块包含ui和brick</p>
+                <p>ui:要引用的布局模块名称</p>
+                <p>brick:布局模块指定的子模块插槽</p>
+                <p>子模块插槽支持3种模块插入方式</p>
+                <div class="explain-info-list">
+                    <p>1. 插槽名:子模块名称</p>
+                    <p>2. 插槽名:布局模块名</p>
+                    <p>3. 插槽名:子模块数组</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wrap">
+    <div class="url">
+        <input id="url" value="http://www.brickui.com/p?json="/>
+        <button class="url-view">查看</button>
+        <button class="url-save">保存到我的作品</button>
+    </div>
+</div>
+<script>
+    function change(doc, change) {
+        var value = doc.getValue()
+        value = value.replace(/\/\/.*/g, "")
+        value = value.replace(/[\r\n]/g, "")
+        value = value.replace(/\ +/g, "")
+
+        $('#url').val('http://www.brickui.com/p?json=' + value)
+
+    }
+
+    var code = CodeMirror.fromTextArea(document.getElementById("code"), {
+        mode: "javascript",
+        theme: 'panda-syntax',
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true
+    });
+    code.on('change', change)
+    var demo = CodeMirror.fromTextArea(document.getElementById("demo"), {
+        mode: "javascript",
+        theme: 'panda-syntax',
+        lineNumbers: true,
+        styleActiveLine: true,
+        matchBrackets: true
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<div class="content" id="create-content" style="display: none">
+    <div class="form">
+        <div class="formitm">
+            <label class="lab">名称：</label>
+            <div class="info">
+                <input name="name" type="text" class="ipt" placeholder="字母(a-z)和连字符(-)"/>
+            </div>
+        </div>
+        <div class="formitm">
+            <label class="lab">关键词：</label>
+            <div class="info">
+                <input name="keywords" type="text" class="ipt" />
+            </div>
+        </div>
+        <div class="formitm">
+            <label class="lab">描述：</label>
+            <div class="info">
+                <textarea name="description" class="textarea"></textarea>
+            </div>
+        </div>
+        <div class="formitm button">
+            <div class="info">
+                <button class="btn btn-primary" id="create-blog">确定</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function(){
+        $('#create-btn').on('click',function(){
+            $("#create-content").show().data('action','create')
+        })
+        $('body').on('click',function(e){
+            console.log('$("#create-content").find(e.target)',e.target,document.getElementById('create-btn'),!document.getElementById('create-content').contains(e.target),e.target !== document.getElementById('create-btn'))
+            if(!document.getElementById('create-content').contains(e.target) && e.target !== document.getElementById('create-btn')) {
+                $("#create-content").hide()
+            }
+        })
+        $('.blog .list li i').on('click',function(e){
+            var id = $(e.target).data('id')
+            $("#create-content").show().data('action','set').data('id',id)
+            var data = {
+                id:id
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/blog/info',
+                data: data,
+                success: function(data){
+                    console.log(data)
+                    if(data.code === 0) {
+                        $("[name='title']").val(data.data.title)
+                        $("[name='category'][value="+data.data.category_id+"]").prop("checked",true)
+                        $("[name='url']").val(data.data.url)
+                        $("[name='description']").val(data.data.description)
+                    }
+                },
+                dataType: 'json'
+            });
+        })
+        $('#create-blog').on('click',function(){
+            //check
+            var name = $("[name='name']").val()
+            var keywords = $("[name='keywords']").val()
+            var description = $("[name='description']").val()
+            var action = $("#create-content").data('action')
+
+            var postUrl = action === 'create' ? '/dev/create' : '/dev/update'
+
+            var data = {
+                name:name,
+                keywords: keywords,
+                description: description
+            }
+
+            if( action === 'set') {
+                data.id = $("#create-content").data('id')
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: postUrl,
+                data: data,
+                success: function(data){
+                    if(data.code === 0) {
+                        location.reload(true)
+                    }
+                },
+                dataType: 'json'
+            });
+
+        })
+    })
+</script>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh" style="height: 100%">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <title>模块开发 - BrickUI 砖块UI 模块化用户界面</title>
+    <link href="/static/normalize.css" rel="stylesheet">
+    <link href="/static/restyle.css" rel="stylesheet">
+    <link href="/static/button.css" rel="stylesheet">
+    <link href="/static/top.css" rel="stylesheet">
+    <link href="/static/dev/style.css" rel="stylesheet">
+    <link href="/static/css/create.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/dev/js.js"></script>
+</head>
+<body style="height: 100%">
+{include file="public/top" /}
+<div class="wrap">
+    <div class="list clearfix">
+        {foreach $list as $key=>$vo }
+        <a href="/dev/{$vo.name}">
+            <i></i>
+            <span>{$vo.name}</span>
+        </a>
+        {/foreach}
+    </div>
+    <div class="create">
+        <div class="btn btn-primary" id="create-btn">创建</div>
+    </div>
+</div>
+{include file="public/create" /}
+</body>
+</html>
