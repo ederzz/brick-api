@@ -1,17 +1,30 @@
 <?php
 namespace app\index\controller;
 use think\Controller;
-use app\index\controller\BaseAuth;
+use app\index\controller\Base;
 use app\index\model\Project as ProjectModal;
 
-class DevHome extends BaseAuth
+class Brick extends Base
 {
     public function index()
     {
         if ($this->request->isGet()) {
-            $data = ['user_id'=>$this->user_id];
+            $category = input('get.category');
+            $layout = input('get.layout');
+            $page = input('get.page');
 
-            $result = ProjectModal::getMyProject($data);
+            $data = [];
+
+            if($category) {
+                $data['category'] = $category;
+            }
+
+            if($layout) {
+                $data['layout'] = $layout;
+            }
+
+
+            $result = ProjectModal::getProject($data);
 
             if($result) {
                 $return = ['code'=>0, 'data'=>$result, 'message'=>'获取成功'];
