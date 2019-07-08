@@ -11,6 +11,7 @@ class Brick extends Base
         if ($this->request->isGet()) {
             $category = input('get.category');
             $layout = input('get.layout');
+            $stack = input('get.stack');
             $page = input('get.page');
 
             $data = [];
@@ -21,6 +22,10 @@ class Brick extends Base
 
             if($layout) {
                 $data['layout'] = $layout;
+            }
+
+            if($stack) {
+                $data['stack'] = $stack;
             }
 
 

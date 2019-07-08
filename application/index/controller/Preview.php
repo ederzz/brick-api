@@ -33,18 +33,19 @@ class Preview extends Base
                                     //$fieldFile = ['type'=>$file->file_type,'content'=>$file->content];
                                     //array_push($data[$project->name],$fieldFile);
                                     $data[$project->name][$file->file_type] = $file->content;
+                                    $data[$project->name]['stack'] = $project->stack;
                                 }
                             }
                         }
                         $return = ['code' => 0, 'data' => $data, 'message' => '获取成功'];
                     }else{
-                        $return = ['code' => 1, 'message' => '引入的项目是空项目'];
+                        $return = ['code' => 1, 'message' => '引入的模块是空模块'];
                     }
                 }else{
-                    $return = ['code' => 1, 'message' => '获取引入的项目失败'];
+                    $return = ['code' => 1, 'message' => '获取引入的模块失败'];
                 }
             }else{
-                $return = ['code' => 1, 'message' => '没有引入项目'];
+                $return = ['code' => 1, 'message' => '没有找到相关模块'];
             }
             return json($return, 200);
         }

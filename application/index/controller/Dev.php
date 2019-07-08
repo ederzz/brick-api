@@ -63,6 +63,7 @@ class Dev extends BaseAuth
             $name = input('post.name'); // 名称是唯一的
             $category = input('post.category');
             $layout = input('post.layout');
+            $stack = input('post.stack');
             $tags = input('post.tags/a');
             $description = input('post.description');
 
@@ -77,6 +78,8 @@ class Dev extends BaseAuth
                 $errorMessage = '请选择分类';
             }else if(!$layout) {
                 $errorMessage = '请选择布局';
+            }else if(!$stack) {
+                $errorMessage = '请选择技术栈';
             }
 
             if (!$errorMessage) {
@@ -130,6 +133,7 @@ class Dev extends BaseAuth
                     $data = ['name' => $name,
                         'category' => $category,
                         'layout' => $layout,
+                        'stack' => $stack,
                         'tags_id' => $tags_id,
                         'description' => $description,
                         'user_id' => $this->user_id,

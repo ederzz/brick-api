@@ -17,6 +17,7 @@ return [
     'user/info' => 'UserInfo/index',
     'brick/getList' => 'Brick/index', // 模块商城
     'wall/create' => 'WallAuth/index', // 创建一个作品
+    'wall/save' => 'WallAuth/save', // 创建一个作品
     'wall/getList' => 'Wall/index', // 获取作品列表
     'wall/getMyList' => 'WallAuth/myList', // 获取个人作品
     'wall/getMyWorks' => 'WallAuth/myWorks', // 获取个人作品

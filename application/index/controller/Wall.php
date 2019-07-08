@@ -33,7 +33,7 @@ class Wall extends Base
                 $tagsIds = array_unique($tagsIds,SORT_REGULAR);
 
                 $userResult = UserModal::getUserInfos($userIds);
-                $tagResult = WorksTags::findByIds($tagsIds); // 该页所有的标签信息
+                $tagResult = WorksTagsModal::findByIds($tagsIds); // 该页所有的标签信息
 
                 $data = [];
 

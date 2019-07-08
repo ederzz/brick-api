@@ -15,11 +15,26 @@ class Works extends Model
         return $result->id;
     }
 
+    public static function saveWorks($data)
+    {
+        $result = self::update($data);
+        return $result->id;
+    }
+
     public static function getWorks($data)
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
             ->field('name,code,user_id,tags_id')
+            ->select();
+        return $result;// array , empty array
+    }
+
+    public static function getMyWorks($data)
+    {
+        $result = self::where($data)
+            ->order('create_time', 'desc')
+            ->field('name,code,id')
             ->select();
         return $result;// array , empty array
     }

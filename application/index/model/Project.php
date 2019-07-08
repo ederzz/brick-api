@@ -17,7 +17,7 @@ class Project extends Model {
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,description')
+            ->field('name,category,layout,stack,description')
             ->select();
         return $result;// array , empty array
     }
@@ -26,7 +26,7 @@ class Project extends Model {
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,description')
+            ->field('name,category,layout,stack,description')
             ->select();
         return $result;
     }
