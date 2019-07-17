@@ -47,9 +47,9 @@ class Dev extends BaseAuth
         if ($this->request->isPost()) {
             $name = input('post.name'); // 名称是唯一的
             $result = ProjectModal::getProjectByName($name);
-            if($result) {
+            if ($result) {
                 $return = ['code' => 1, 'message' => '项目名称重复'];
-            }else {
+            } else {
                 $return = ['code' => 0, 'message' => '项目名称合法'];
             }
 
@@ -70,15 +70,15 @@ class Dev extends BaseAuth
             $errorMessage = null;
             if (!$this->user_id) {
                 $errorMessage = '请登录';
-            }else if(!$name) {
+            } else if (!$name) {
                 $errorMessage = '请填写项目名称';
-            }else if(!$tags) {
+            } else if (!$tags) {
                 $errorMessage = '请填写标签';
-            }else if(!$category) {
+            } else if (!$category) {
                 $errorMessage = '请选择分类';
-            }else if(!$layout) {
+            } else if (!$layout) {
                 $errorMessage = '请选择布局';
-            }else if(!$stack) {
+            } else if (!$stack) {
                 $errorMessage = '请选择技术栈';
             }
 
@@ -95,40 +95,40 @@ class Dev extends BaseAuth
                     $tagsInfo = ProjectTagsModal::findProjectTags($tags);
                     // 已经存在的标签不用创建 直接push ID 到 $tagsIds
 
-                    if($tagsInfo) {
-                        foreach ($tags as $k=>$v) {
+                    if ($tagsInfo) {
+                        foreach ($tags as $k => $v) {
                             $exist = false; // 标签是否已经存在
-                            foreach ($tagsInfo as $kk=>$vv) {
-                                if($vv->name == $v) {
+                            foreach ($tagsInfo as $kk => $vv) {
+                                if ($vv->name == $v) {
                                     $exist = $vv->id;
                                 }
                             }
-                            if($exist) {
+                            if ($exist) {
                                 // 标签已经存在
-                                array_push($tagsIds,$exist); // 已经存在的ID
-                            }else{
+                                array_push($tagsIds, $exist); // 已经存在的ID
+                            } else {
                                 // 标签不存在
-                                array_push($newTags,$v); // 新的标签
+                                array_push($newTags, $v); // 新的标签
                             }
                         }
-                    }else{
+                    } else {
                         // 如果没有找到 所以的标签都是新标签
                         $newTags = $tags;
                     }
 
-                    if($newTags) {
+                    if ($newTags) {
                         // 有新标签
                         // 添加标签 并且返回标签ID
-                        foreach($newTags as $key=>$tag){
-                            array_push($newTagsData,['name' => $tag]);
+                        foreach ($newTags as $key => $tag) {
+                            array_push($newTagsData, ['name' => $tag]);
                         }
                         $tagsResults = ProjectTagsModal::createProjectTags($newTagsData);
-                        foreach ($tagsResults as $key=>$tag) {
-                            array_push($tagsIds,$tag->id); // 新的ID
+                        foreach ($tagsResults as $key => $tag) {
+                            array_push($tagsIds, $tag->id); // 新的ID
                         }
                     }
 
-                    $tags_id = join(',',$tagsIds); // 标签IDs逗号分隔
+                    $tags_id = join(',', $tagsIds); // 标签IDs逗号分隔
 
                     $data = ['name' => $name,
                         'category' => $category,
@@ -146,6 +146,102 @@ class Dev extends BaseAuth
                     } else {
                         $return = ['code' => 1, 'message' => '创建失败'];
                     }
+                }
+            } else {
+                $return = ['code' => 1, 'message' => $errorMessage];
+            }
+
+            return json($return, 200);
+        }
+    }
+
+    public function updateProject()
+    {
+        if ($this->request->isPost()) {
+            $id = input('post.id');
+            $name = input('post.name'); // 名称是唯一的
+            $category = input('post.category');
+            $layout = input('post.layout');
+            $stack = input('post.stack');
+            $tags = input('post.tags/a');
+            $description = input('post.description');
+
+            $errorMessage = null;
+            if (!$this->user_id) {
+                $errorMessage = '请登录';
+            } else if (!$name) {
+                $errorMessage = '请填写项目名称';
+            } else if (!$tags) {
+                $errorMessage = '请填写标签';
+            } else if (!$category) {
+                $errorMessage = '请选择分类';
+            } else if (!$layout) {
+                $errorMessage = '请选择布局';
+            } else if (!$stack) {
+                $errorMessage = '请选择技术栈';
+            }
+
+            if (!$errorMessage) {
+
+                $tagsIds = []; // 作品关联的标签ID
+                $newTags = []; // 要创建的标签
+                $newTagsData = []; // 要创建的标签数据
+                // 查找标签
+                $tagsInfo = ProjectTagsModal::findProjectTags($tags);
+                // 已经存在的标签不用创建 直接push ID 到 $tagsIds
+
+                if ($tagsInfo) {
+                    foreach ($tags as $k => $v) {
+                        $exist = false; // 标签是否已经存在
+                        foreach ($tagsInfo as $kk => $vv) {
+                            if ($vv->name == $v) {
+                                $exist = $vv->id;
+                            }
+                        }
+                        if ($exist) {
+                            // 标签已经存在
+                            array_push($tagsIds, $exist); // 已经存在的ID
+                        } else {
+                            // 标签不存在
+                            array_push($newTags, $v); // 新的标签
+                        }
+                    }
+                } else {
+                    // 如果没有找到 所以的标签都是新标签
+                    $newTags = $tags;
+                }
+
+                if ($newTags) {
+                    // 有新标签
+                    // 添加标签 并且返回标签ID
+                    foreach ($newTags as $key => $tag) {
+                        array_push($newTagsData, ['name' => $tag]);
+                    }
+                    $tagsResults = ProjectTagsModal::createProjectTags($newTagsData);
+                    foreach ($tagsResults as $key => $tag) {
+                        array_push($tagsIds, $tag->id); // 新的ID
+                    }
+                }
+
+                $tags_id = join(',', $tagsIds); // 标签IDs逗号分隔
+
+                $data = [
+                    'id' => $id,
+                    'name' => $name,
+                    'category' => $category,
+                    'layout' => $layout,
+                    'stack' => $stack,
+                    'tags_id' => $tags_id,
+                    'description' => $description,
+                    'user_id' => $this->user_id,
+                ];
+
+                $result = ProjectModal::updateProject($data);
+
+                if ($result) {
+                    $return = ['code' => 0, 'message' => '修改成功'];
+                } else {
+                    $return = ['code' => 1, 'message' => '修改失败'];
                 }
             } else {
                 $return = ['code' => 1, 'message' => $errorMessage];

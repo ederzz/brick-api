@@ -22,7 +22,9 @@ return [
     'wall/getMyList' => 'WallAuth/myList', // 获取个人作品
     'wall/getMyWorks' => 'WallAuth/myWorks', // 获取个人作品
     'dev/getList' => 'DevHome/index', // 开发者首页项目列表
+    'dev/getTags' => 'DevHome/getTags',
     'dev/create' => 'Dev/createProject',
+    'dev/update' => 'Dev/updateProject',
     'dev/checkName' => 'Dev/checkName', // 检查名称是否唯一
     'dev/getFile' => 'Dev/getFile',
     'preview/getFiles' => 'Preview/getFiles', // 通过项目名称数组 获取 文件对象集合

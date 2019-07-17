@@ -13,6 +13,11 @@ class Project extends Model {
         return $result -> id;
     }
 
+    public static function updateProject($data) {
+        $result = self::update($data);
+        return $result -> id;
+    }
+
     public static function getProject($data)
     {
         $result = self::where($data)
@@ -26,7 +31,7 @@ class Project extends Model {
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,category,layout,stack,description')
+            ->field('id,name,category,layout,stack,description,tags_id')
             ->select();
         return $result;
     }

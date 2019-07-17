@@ -34,6 +34,7 @@ class Preview extends Base
                                     //array_push($data[$project->name],$fieldFile);
                                     $data[$project->name][$file->file_type] = $file->content;
                                     $data[$project->name]['stack'] = $project->stack;
+                                    $data[$project->name]['category'] = $project->category;
                                 }
                             }
                         }
