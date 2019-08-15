@@ -65,7 +65,9 @@ class Dev extends BaseAuth
             $layout = input('post.layout');
             $stack = input('post.stack');
             $tags = input('post.tags/a');
+            $slots = input('post.slots');
             $description = input('post.description');
+            $thumb = input('post.thumb');
 
             $errorMessage = null;
             if (!$this->user_id) {
@@ -134,9 +136,11 @@ class Dev extends BaseAuth
                         'category' => $category,
                         'layout' => $layout,
                         'stack' => $stack,
+                        'slots' => $slots,
                         'tags_id' => $tags_id,
                         'description' => $description,
                         'user_id' => $this->user_id,
+                        'thumb' => $thumb
                     ];
 
                     $result = ProjectModal::createProject($data);
@@ -164,7 +168,9 @@ class Dev extends BaseAuth
             $layout = input('post.layout');
             $stack = input('post.stack');
             $tags = input('post.tags/a');
+            $slots = input('post.slots');
             $description = input('post.description');
+            $thumb = input('post.thumb');
 
             $errorMessage = null;
             if (!$this->user_id) {
@@ -231,9 +237,11 @@ class Dev extends BaseAuth
                     'category' => $category,
                     'layout' => $layout,
                     'stack' => $stack,
+                    'slots' => $slots,
                     'tags_id' => $tags_id,
                     'description' => $description,
                     'user_id' => $this->user_id,
+                    'thumb' => $thumb
                 ];
 
                 $result = ProjectModal::updateProject($data);

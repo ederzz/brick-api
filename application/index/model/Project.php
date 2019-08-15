@@ -18,11 +18,11 @@ class Project extends Model {
         return $result -> id;
     }
 
-    public static function getProject($data)
+    public static function getProjects($data)
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,category,layout,stack,description')
+            ->field('name,category,layout,stack,description,thumb')
             ->select();
         return $result;// array , empty array
     }
@@ -31,7 +31,7 @@ class Project extends Model {
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('id,name,category,layout,stack,description,tags_id')
+            ->field('id,name,category,layout,stack,description,thumb,slots,tags_id')
             ->select();
         return $result;
     }

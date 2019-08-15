@@ -3,6 +3,16 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/application" isTestSource="false" packagePrefix="app\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-openapi-php-sdk-master/aliyun-php-sdk-core" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-openapi-php-sdk-master/aliyun-php-sdk-sts" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Auth" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Autoloader" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Exception" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Http" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Profile" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/Regions" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-core/UnitTest" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/aliyun-php-sdk-sts/Sts" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/aliyuncs/oss-sdk-php" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/composer" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/topthink/think-captcha" />

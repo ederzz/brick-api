@@ -5,7 +5,7 @@ use app\index\controller\BaseAuth;
 use app\index\model\Works as WorksModal;
 use app\index\model\WorksTags as WorksTagsModal;
 
-class WallAuth extends BaseAuth
+class WorksAuth extends BaseAuth
 {
     public function index()
     {
@@ -15,6 +15,7 @@ class WallAuth extends BaseAuth
             //$collect = input('post.collect'); // 作品集
             $tags = input('post.tags/a'); // 标签
             $code = input('post.code'); // json 内容
+            $thumb = input('post.thumb');
 
             $errorMessage = null;
             if (!$this->user_id) {
@@ -75,12 +76,13 @@ class WallAuth extends BaseAuth
                     //'collect' => $collect,
                     'code' => $code,
                     'user_id' => $this->user_id,
+                    'thumb' => $thumb
                 ];
 
                 $result = WorksModal::createWorks($data);
 
                 if ($result) {
-                    $return = ['code' => 0, 'message' => '创建成功'];
+                    $return = ['code' => 0, 'data'=> $result, 'message' => '创建成功'];
                 } else {
                     $return = ['code' => 1, 'message' => '创建失败'];
                 }
@@ -101,6 +103,7 @@ class WallAuth extends BaseAuth
             //$collect = input('post.collect'); // 作品集
             $tags = input('post.tags/a'); // 标签
             $code = input('post.code'); // json 内容
+            $thumb = input('post.thumb');
 
             $errorMessage = null;
             if (!$this->user_id) {
@@ -164,6 +167,7 @@ class WallAuth extends BaseAuth
                     'tags_id' => $tags_id,
                     //'collect' => $collect,
                     'code' => $code,
+                    'thumb' => $thumb
                 ];
 
                 $result = WorksModal::saveWorks($data);
@@ -224,6 +228,7 @@ class WallAuth extends BaseAuth
                 $data = [
                     'name'=>$result->name,
                     'code'=>$result->code,
+                    'thumb'=>$result->thumb,
                     'tags'=> $findTagsName,
                 ];
 

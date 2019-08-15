@@ -29,7 +29,7 @@ class Brick extends Base
             }
 
 
-            $result = ProjectModal::getProject($data);
+            $result = ProjectModal::getProjects($data);
 
             if($result) {
                 $return = ['code'=>0, 'data'=>$result, 'message'=>'获取成功'];

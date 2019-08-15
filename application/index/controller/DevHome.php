@@ -42,5 +42,19 @@ class DevHome extends BaseAuth
             return json($return, 200);
         }
     }
+
+    public function getProject() {
+        if($this->request->isGet()) {
+            $projectName = input('post.projectName');
+            $project = ProjectModal::getProjectByName($projectName);
+            if($project) {
+                $return = ['code'=>0, 'data'=>$project, 'message'=>'获取成功'];
+            }else{
+                $return = ['code'=>1, 'message'=>'获取失败'];
+            }
+
+            return json($return, 200);
+        }
+    }
 }
 

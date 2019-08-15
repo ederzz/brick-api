@@ -14,6 +14,16 @@
       <path value="$PROJECT_DIR$/vendor/workerman/workerman" />
       <path value="$PROJECT_DIR$/vendor/topthink/think-installer" />
       <path value="$PROJECT_DIR$/vendor/aliyuncs/oss-sdk-php" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Auth" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Http" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Profile" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Regions" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/UnitTest" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Exception" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-core/Autoloader" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-php-sdk-sts/Sts" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-openapi-php-sdk-master/aliyun-php-sdk-sts" />
+      <path value="$PROJECT_DIR$/vendor/aliyun-openapi-php-sdk-master/aliyun-php-sdk-core" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="5.4.0" />

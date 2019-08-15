@@ -8,7 +8,7 @@ use app\index\model\User as UserModal;
 use app\index\model\WorksTags as WorksTagsModal;
 
 
-class Wall extends Base
+class Works extends Base
 {
     public function index()
     {
@@ -67,6 +67,7 @@ class Wall extends Base
                     $item = [
                         'name'=>$v->name,
                         'code'=>$v->code,
+                        'thumb'=>$v->thumb,
                         'user'=> $userName,
                         'tags'=> $findTagsName,
                     ];
