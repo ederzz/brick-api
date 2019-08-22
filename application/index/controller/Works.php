@@ -38,13 +38,12 @@ class Works extends Base
                 $data = [];
 
                 foreach ($result as $k => $v) {
-                    $findUser = array_filter($userResult,function($vv) use($v){
-                        return $vv->id == $v->user_id;
-                    });
-                    if($findUser) {
-                        $userName = $findUser[0]->account;
-                    }else{
-                        $userName = '';
+                    $userName = '';
+                    foreach ($userResult as $kk => $vv) {
+                        if($vv->id == $v->user_id) {
+                            $userName = $vv->account;
+                            break;
+                        }
                     }
 
                     //var_dump($v->id);
@@ -69,12 +68,48 @@ class Works extends Base
                         'code'=>$v->code,
                         'thumb'=>$v->thumb,
                         'user'=> $userName,
+                        'id' => $v->id,
                         'tags'=> $findTagsName,
                     ];
                     array_push($data,$item);
                 }
 
 
+                $return = ['code'=>0, 'data'=>$data, 'message'=>'获取成功'];
+            }else if(is_array($result) && empty($result)) {
+                $return = ['code'=>0, 'message'=>'没有查询到数据'];
+            }else{
+                $return = ['code'=>1, 'message'=>'获取失败'];
+            }
+
+            return json($return, 200);
+
+        }
+    }
+    public function info()
+    {
+        if ($this->request->isGet()) {
+
+            $id = input('get.id'); // 名称是唯一的
+
+            $result = WorksModal::getWorksById($id);
+
+            $thisTagsIds = explode(',',$result->tags_id); // 该条数据的标签ID
+            $tagResult = WorksTagsModal::findByIds($thisTagsIds); // 标签信息
+
+            $findTagsName = [];
+            foreach ($tagResult as $kk=>$vv) {
+                array_push($findTagsName,$vv->name);
+            }
+
+            $data = [
+                'name'=>$result->name,
+                'code'=>$result->code,
+                'thumb'=>$result->thumb,
+                'tags'=> $findTagsName,
+            ];
+
+            if($result) {
                 $return = ['code'=>0, 'data'=>$data, 'message'=>'获取成功'];
             }else if(is_array($result) && empty($result)) {
                 $return = ['code'=>0, 'message'=>'没有查询到数据'];

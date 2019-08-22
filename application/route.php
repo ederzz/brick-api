@@ -16,11 +16,13 @@ return [
     'user/register'=> 'User/register',
     'user/info' => 'UserInfo/index',
     'brick/getList' => 'Brick/index', // 模块商城
+    'brick/getFile' => 'Brick/getFile', // 模块商城
     'works/create' => 'WorksAuth/index', // 创建一个作品
     'works/save' => 'WorksAuth/save', // 创建一个作品
     'works/getList' => 'Works/index', // 获取作品列表
     'works/getMyList' => 'WorksAuth/myList', // 获取个人作品
     'works/getMyWorks' => 'WorksAuth/myWorks', // 获取个人作品
+    'works/info' => 'Works/info', // 获取作品详情
     'dev/getList' => 'DevHome/index', // 开发者首页项目列表
     'dev/getProject' => 'DevHome/getProject',
     'dev/getTags' => 'DevHome/getTags',

@@ -21,6 +21,12 @@ class ProjectTags extends Model
         return $result;
     }
 
+    public static function findByIds($ids)
+    {
+        $result = self::where('id','in',$ids)->select();
+        return $result;
+    }
+
     // 创建多条数据
     public static function createProjectTags($datas)
     {

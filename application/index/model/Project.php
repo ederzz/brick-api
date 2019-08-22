@@ -22,7 +22,7 @@ class Project extends Model {
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,category,layout,stack,description,thumb')
+            ->field('id,name,category,layout,stack,description,thumb,slots,tags_id,user_id')
             ->select();
         return $result;// array , empty array
     }

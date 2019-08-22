@@ -25,7 +25,7 @@ class Works extends Model
     {
         $result = self::where($data)
             ->order('create_time', 'desc')
-            ->field('name,code,thumb,user_id,tags_id')
+            ->field('name,code,thumb,user_id,tags_id,id')
             ->select();
         return $result;// array , empty array
     }
