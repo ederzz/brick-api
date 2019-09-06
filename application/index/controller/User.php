@@ -16,19 +16,20 @@ class User extends Base
 
             if($userInfo) {
                 $id = $userInfo->id;
-                $token = md5(uniqid(mt_rand(), true));
+                $token = md5(uniqid(mt_rand(), true)); // refreshToken
 
                 $token_id = TokenModel::updateTokenByUserId($id,$token);
 
                 if($token_id) {
-                    $interimToken = md5(uniqid(mt_rand(), true));
+                    $interimToken = md5(uniqid(mt_rand(), true)); // 临时token
                     $data = [
                         'token' => $interimToken,
                         'refreshToken' => $token
                     ];
 
                     // 设置缓存数据
-                    cache($interimToken, $id, 7200);
+                    cache($interimToken, $id, 3600*5);
+                    //cache($interimToken, $id, 60);
 
                     $return = ['data' => $data,'code'=>0, 'message'=>'登录成功'];
 
@@ -163,7 +164,7 @@ class User extends Base
     {
         if ($this->request->isPost()) {
             $phone = input('post.phone');
-            $res = UserModel::findAccount($phone);
+            $res = UserModel::findPhone($phone);
             if($res) {
                 return json(['code'=>1, 'message'=>'手机已注册'], 200);
             }else{

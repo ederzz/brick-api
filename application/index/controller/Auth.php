@@ -69,7 +69,7 @@ class Auth extends Base
                 //$refreshTokenInfo = RefreshtokenModel::updateRefreshtoken($refreshtoken,$newRefreshtoken);
                 // 缓存新token
                 $interimToken = md5(uniqid(mt_rand(), true));
-                cache($interimToken, $tokenInfo->user_id, 7200);
+                cache($interimToken, $tokenInfo->user_id, 3600*5);
                 $data = [
                     'token' => $interimToken
                 ];

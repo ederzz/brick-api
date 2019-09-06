@@ -15,6 +15,10 @@ return [
     'user/getCode'=> 'User/getCode',
     'user/register'=> 'User/register',
     'user/info' => 'UserInfo/index',
+    'user/hasAccount' => 'User/hasAccount', // 账户是否存在
+    'user/hasPhone' => 'User/hasPhone', // phone是否存在
+    'user/validateCode' => 'User/validateCode', //验证code
+    'auth/refreshtoken' => 'Auth/refreshtoken', // 刷新token
     'brick/getList' => 'Brick/index', // 模块商城
     'brick/getFile' => 'Brick/getFile', // 模块商城
     'works/create' => 'WorksAuth/index', // 创建一个作品
